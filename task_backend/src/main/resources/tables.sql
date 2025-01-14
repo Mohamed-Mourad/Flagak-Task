@@ -11,6 +11,8 @@ CREATE TABLE customers (
 CREATE TABLE vendors (
                          vendor_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
                          business_name VARCHAR(255) NOT NULL,
+                         email VARCHAR(255) UNIQUE NOT NULL,
+                         password VARCHAR(255) NOT NULL,
                          business_certificate_number VARCHAR(50) UNIQUE NOT NULL,
                          billing_address TEXT NOT NULL,
                          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

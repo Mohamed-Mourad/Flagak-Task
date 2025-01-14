@@ -22,6 +22,12 @@ public class VendorEntity {
     @Column(name = "business_name", nullable = false)
     private String businessName;
 
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
     @Column(name = "business_certificate_number", nullable = false, unique = true)
     private String businessCertificateNumber;
 
