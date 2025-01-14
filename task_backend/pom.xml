@@ -8,10 +8,10 @@
 		<version>3.4.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>flagak-task-backend</artifactId>
+	<groupId>com.flagak</groupId>
+	<artifactId>task_backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>flagak-task-backend</name>
+	<name>task_backend</name>
 	<description>Technical Task for E-commerce Application Development</description>
 	<url/>
 	<licenses>
