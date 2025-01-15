@@ -1,4 +1,4 @@
-package com.flagak.task_backend.domains.customers.dtos;
+package com.flagak.task_backend.components.customers.dtos;
 
 import lombok.Data;
 

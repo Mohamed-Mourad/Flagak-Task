@@ -1,8 +1,9 @@
-package com.flagak.task_backend.domains.vendors.controllers;
+package com.flagak.task_backend.components.vendors.controllers;
 
-import com.flagak.task_backend.domains.vendors.dtos.VendorRegisterRequestDTO;
-import com.flagak.task_backend.domains.vendors.dtos.VendorResponseDTO;
-import com.flagak.task_backend.domains.vendors.services.VendorService;
+import com.flagak.task_backend.components.vendors.dtos.VendorRegisterRequestDTO;
+import com.flagak.task_backend.components.vendors.dtos.VendorResponseDTO;
+import com.flagak.task_backend.components.vendors.services.VendorService;
+import com.flagak.task_backend.models.dtos.LoginRequestDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,5 +22,11 @@ public class VendorController {
     public ResponseEntity<VendorResponseDTO> registerVendor(@Valid @RequestBody VendorRegisterRequestDTO request) {
         VendorResponseDTO response = vendorService.registerVendor(request);
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@Valid @RequestBody LoginRequestDTO loginRequest) {
+        String token = vendorService.login(loginRequest);
+        return ResponseEntity.ok(token);
     }
 }

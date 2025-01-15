@@ -1,10 +1,12 @@
-package com.flagak.task_backend.domains.customers.services;
+package com.flagak.task_backend.components.customers.services;
 
 
-import com.flagak.task_backend.domains.customers.dtos.CustomerRegisterRequestDTO;
-import com.flagak.task_backend.domains.customers.dtos.CustomerResponseDTO;
+import com.flagak.task_backend.components.customers.dtos.CustomerRegisterRequestDTO;
+import com.flagak.task_backend.components.customers.dtos.CustomerResponseDTO;
+import com.flagak.task_backend.models.dtos.LoginRequestDTO;
 import com.flagak.task_backend.models.entities.CustomerEntity;
 import com.flagak.task_backend.repos.CustomerRepo;
+import com.flagak.task_backend.utils.JwtUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +17,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepo customerRepo;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
+
 
     public CustomerServiceImpl(CustomerRepo customerRepo) {
         this.customerRepo = customerRepo;
         this.passwordEncoder = new BCryptPasswordEncoder();
+        jwtUtil = new JwtUtil();
     }
 
     public CustomerResponseDTO registerCustomer(CustomerRegisterRequestDTO requestDTO) {
@@ -45,6 +50,18 @@ public class CustomerServiceImpl implements CustomerService {
                 .format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
 
         return responseDTO;
+    }
+
+    @Override
+    public String login(LoginRequestDTO loginRequest) {
+        var customer = customerRepo.findByEmail(loginRequest.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
+
+        if (!passwordEncoder.matches(loginRequest.getPassword(), customer.getPassword())) {
+            throw new IllegalArgumentException("Invalid email or password");
+        }
+
+        return jwtUtil.generateToken(customer.getEmail());
     }
 }
 

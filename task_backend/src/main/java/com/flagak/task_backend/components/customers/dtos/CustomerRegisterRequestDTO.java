@@ -1,21 +1,15 @@
-package com.flagak.task_backend.domains.vendors.dtos;
-
-import lombok.Data;
+package com.flagak.task_backend.components.customers.dtos;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 
 @Data
-public class VendorRegisterRequestDTO {
-    @NotBlank(message = "Business name is required")
-    private String businessName;
+public class CustomerRegisterRequestDTO {
 
-    @NotBlank(message = "Business certificate number is required")
-    private String businessCertificateNumber;
-
-    @NotBlank(message = "Billing address is required")
-    private String billingAddress;
+    @NotBlank(message = "Name is required")
+    private String name;
 
     @Email(message = "Invalid email format")
     @NotBlank(message = "Email is required")
