@@ -29,6 +29,54 @@ Ensure the following tools are installed:
 
 - Maven 3.x
 
+## Project Structure
+```
+src/
+└── main/
+    └── java/
+        └── com/
+            └── flagak/
+                └── task_backend/
+                    ├── components/
+                    │   ├── customers/
+                    │   │   ├── controllers/
+                    │   │   ├── dtos/
+                    │   │   ├── services/
+                    │   ├── vendors/
+                    │   │   ├── controllers/
+                    │   │   ├── dtos/
+                    │   │   ├── services/
+                    │   ├── products/
+                    │   │   ├── controllers/
+                    │   │   ├── dtos/
+                    │   │   ├── services/
+                    │   ├── carts/
+                    │   │   ├── controllers/
+                    │   │   ├── dtos/
+                    │   │   ├── services/
+                    ├── models/
+                    │   ├── entities/
+                    │   │   ├── CustomerEntity.java
+                    │   │   ├── VendorEntity.java
+                    │   │   ├── ProductEntity.java
+                    │   │   ├── CartEntity.java
+                    │   │   ├── CartItemEntity.java
+                    │   ├── dtos/
+                    │   │   ├── LoginRequestDTO.java
+                    ├── repos/
+                    │   ├── CustomerRepo.java
+                    │   ├── VendorRepo.java
+                    │   ├── ProductRepo.java
+                    │   ├── CartRepo.java
+                    │   ├── CartItemRepo.java
+                    ├── utils/
+                    │   ├── JwtUtil.java
+
+```
+## API End Points found @
+```
+src/main/resources/docs/API_Documentation.postman_collection.json
+```
 # Database Setup
 
 ## Schema

@@ -9,6 +9,8 @@ import com.flagak.task_backend.utils.JwtUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class VendorServiceImpl implements VendorService {
 
@@ -30,7 +32,10 @@ public class VendorServiceImpl implements VendorService {
         vendor.setBusinessCertificateNumber(request.getBusinessCertificateNumber());
         vendor.setBillingAddress(request.getBillingAddress());
         vendor.setEmail(request.getEmail());
-        vendor.setPassword(passwordEncoder.encode(request.getPassword()));
+        vendor.setPassword(request.getPassword());
+
+        // To use when testing with actual registered users:
+        //vendor.setPassword(passwordEncoder.encode(request.getPassword()));
 
         // Save the vendor to the database
         VendorEntity savedVendor = vendorRepo.save(vendor);
@@ -49,13 +54,18 @@ public class VendorServiceImpl implements VendorService {
 
     @Override
     public String login(LoginRequestDTO loginRequest) {
-        var customer = vendorRepo.findByEmail(loginRequest.getEmail())
+        var vendor = vendorRepo.findByEmail(loginRequest.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
 
-        if (!passwordEncoder.matches(loginRequest.getPassword(), customer.getPassword())) {
-            throw new IllegalArgumentException("Invalid email or password");
+        if (!Objects.equals(loginRequest.getPassword(), vendor.getPassword())) {
+            throw new IllegalArgumentException("Invalid password");
         }
 
-        return jwtUtil.generateToken(customer.getEmail());
+        // To use when testing with actual registered users:
+//        if (!passwordEncoder.matches(loginRequest.getPassword(), vendor.getPassword())) {
+//            throw new IllegalArgumentException("Invalid email or password");
+//        }
+
+        return jwtUtil.generateToken(vendor.getEmail());
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -36,7 +37,10 @@ public class CustomerServiceImpl implements CustomerService {
         CustomerEntity customer = new CustomerEntity();
         customer.setName(requestDTO.getName());
         customer.setEmail(requestDTO.getEmail());
-        customer.setPassword(passwordEncoder.encode(requestDTO.getPassword()));
+        customer.setPassword(requestDTO.getPassword());
+
+        // To use when testing with actual registered users:
+        //customer.setPassword(passwordEncoder.encode(requestDTO.getPassword()));
 
         // Save to database
         CustomerEntity savedCustomer = customerRepo.save(customer);
@@ -55,11 +59,16 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public String login(LoginRequestDTO loginRequest) {
         var customer = customerRepo.findByEmail(loginRequest.getEmail())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid email"));
 
-        if (!passwordEncoder.matches(loginRequest.getPassword(), customer.getPassword())) {
-            throw new IllegalArgumentException("Invalid email or password");
+        if (!Objects.equals(loginRequest.getPassword(), customer.getPassword())) {
+            throw new IllegalArgumentException("Invalid password");
         }
+
+        // To use when testing with actual registered users:
+//        if (!passwordEncoder.matches(loginRequest.getPassword(), customer.getPassword())) {
+//            throw new IllegalArgumentException("Invalid email or password");
+//        }
 
         return jwtUtil.generateToken(customer.getEmail());
     }
