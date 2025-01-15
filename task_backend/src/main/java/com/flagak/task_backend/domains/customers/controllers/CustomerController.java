@@ -1,6 +1,6 @@
 package com.flagak.task_backend.domains.customers.controllers;
 
-import com.flagak.task_backend.domains.customers.dtos.CustomerRegistrationRequestDTO;
+import com.flagak.task_backend.domains.customers.dtos.CustomerRegisterRequestDTO;
 import com.flagak.task_backend.domains.customers.dtos.CustomerResponseDTO;
 import com.flagak.task_backend.domains.customers.services.CustomerService;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ public class CustomerController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<CustomerResponseDTO> registerCustomer(@RequestBody CustomerRegistrationRequestDTO requestDTO) {
+    public ResponseEntity<CustomerResponseDTO> registerCustomer(@RequestBody CustomerRegisterRequestDTO requestDTO) {
         CustomerResponseDTO responseDTO = customerService.registerCustomer(requestDTO);
         return ResponseEntity.ok(responseDTO);
     }
