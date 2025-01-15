@@ -10,4 +10,5 @@ import java.util.UUID;
 @Repository
 public interface VendorRepo extends JpaRepository<VendorEntity, UUID> {
     Optional<VendorEntity> findByBusinessCertificateNumber(String businessCertificateNumber);
+    Optional<VendorEntity> findByEmail(String email);
 }
