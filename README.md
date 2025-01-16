@@ -110,6 +110,7 @@ created_at: TIMESTAMP (Default: Current timestamp)
 ```
 product_id: UUID (Primary Key, auto-generated)
 product_name: VARCHAR(255)
+product_description: VARCHAR(1000)
 price: DECIMAL(10,2)
 stock_quantity: INT
 vendor_id: UUID (Foreign Key referencing vendors.vendor_id)
