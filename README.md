@@ -69,6 +69,9 @@ src/
                     │   ├── ProductRepo.java
                     │   ├── CartRepo.java
                     │   ├── CartItemRepo.java
+                    ├── config/
+                    │   ├── JwtAuthenticationFilter.java
+                    │   ├── SecurityConfig.java
                     ├── utils/
                     │   ├── JwtUtil.java
 
