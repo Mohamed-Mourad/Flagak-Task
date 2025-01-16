@@ -5,10 +5,8 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ProductResponseDTO {
-    private String productId;
+public class ProductRequestDTO {
     private String productName;
     private Double price;
     private int stockQuantity;
-    private String vendorName;
 }
