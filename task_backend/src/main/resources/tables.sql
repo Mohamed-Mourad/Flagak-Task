@@ -54,6 +54,7 @@ CREATE TABLE orders (
                         order_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
                         customer_id UUID NOT NULL,
                         total_price DECIMAL(10, 2) NOT NULL,
+                        payment_type VARCHAR(6) NOT NULL,
                         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                         FOREIGN KEY (customer_id) REFERENCES Customers(customer_id) ON DELETE CASCADE
 );

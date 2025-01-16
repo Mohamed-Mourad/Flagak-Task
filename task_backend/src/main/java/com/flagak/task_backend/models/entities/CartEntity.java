@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.time.LocalDateTime;
 
@@ -28,4 +29,6 @@ public class CartEntity {
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CartItemEntity> cartItems = new ArrayList<>();
 }

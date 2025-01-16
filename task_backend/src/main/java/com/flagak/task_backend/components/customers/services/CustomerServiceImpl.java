@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -71,6 +72,13 @@ public class CustomerServiceImpl implements CustomerService {
 //        }
 
         return jwtUtil.generateToken(customer.getEmail());
+    }
+
+    @Override
+    public UUID getCustomerIdByEmail(String email) {
+        return customerRepo.findByEmail(email)
+                .map(CustomerEntity::getCustomerId)
+                .orElseThrow(() -> new IllegalArgumentException("Customer not found with email: " + email));
     }
 }
 

@@ -27,5 +27,5 @@ public class OrderItemEntity {
     private int quantity;
 
     @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal price;
+    private double price;
 }

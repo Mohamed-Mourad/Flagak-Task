@@ -20,8 +20,11 @@ public class OrderEntity {
     @JoinColumn(name = "customer_id", nullable = false)
     private CustomerEntity customer;
 
-    @Column(nullable = false)
+    @Column(name = "total_price", nullable = false)
     private double totalPrice;
+
+    @Column(name = "payment_type", nullable = false, updatable = false)
+    private String paymentType;
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
