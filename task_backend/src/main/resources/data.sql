@@ -48,3 +48,40 @@ VALUES
      (SELECT product_id FROM products WHERE product_name = 'Handbag'),
      1)
 ;
+
+-- Insert sample orders
+INSERT INTO orders (order_id, customer_id, total_price, payment_type)
+VALUES
+    (gen_random_uuid(),
+     (SELECT customer_id FROM customers WHERE name = 'Mohamed Mourad'),
+     (SELECT SUM(price * quantity) FROM cart_items ci JOIN products p ON ci.product_id = p.product_id WHERE ci.cart_id = (SELECT cart_id FROM carts WHERE customer_id = (SELECT customer_id FROM customers WHERE name = 'Mohamed Mourad'))),
+     'card'),
+    (gen_random_uuid(),
+     (SELECT customer_id FROM customers WHERE name = 'Tony Stark'),
+     (SELECT SUM(price * quantity) FROM cart_items ci JOIN products p ON ci.product_id = p.product_id WHERE ci.cart_id = (SELECT cart_id FROM carts WHERE customer_id = (SELECT customer_id FROM customers WHERE name = 'Tony Stark'))),
+     'cod'),
+    (gen_random_uuid(),
+     (SELECT customer_id FROM customers WHERE name = 'Donald Blake'),
+     (SELECT SUM(price * quantity) FROM cart_items ci JOIN products p ON ci.product_id = p.product_id WHERE ci.cart_id = (SELECT cart_id FROM carts WHERE customer_id = (SELECT customer_id FROM customers WHERE name = 'Donald Blake'))),
+     'card')
+;
+
+-- Insert sample order items
+INSERT INTO order_items (order_item_id, order_id, product_id, quantity, price)
+VALUES
+    (gen_random_uuid(),
+     (SELECT order_id FROM orders WHERE customer_id = (SELECT customer_id FROM customers WHERE name = 'Mohamed Mourad') AND payment_type = 'card'),
+     (SELECT product_id FROM products WHERE product_name = 'Laptop'),
+     1,
+     (SELECT price FROM products WHERE product_name = 'Laptop')),
+    (gen_random_uuid(),
+     (SELECT order_id FROM orders WHERE customer_id = (SELECT customer_id FROM customers WHERE name = 'Tony Stark') AND payment_type = 'cod'),
+     (SELECT product_id FROM products WHERE product_name = 'Running Shoes'),
+     2,
+     (SELECT price FROM products WHERE product_name = 'Running Shoes')),
+    (gen_random_uuid(),
+     (SELECT order_id FROM orders WHERE customer_id = (SELECT customer_id FROM customers WHERE name = 'Donald Blake') AND payment_type = 'card'),
+     (SELECT product_id FROM products WHERE product_name = 'Handbag'),
+     1,
+     (SELECT price FROM products WHERE product_name = 'Handbag'))
+;

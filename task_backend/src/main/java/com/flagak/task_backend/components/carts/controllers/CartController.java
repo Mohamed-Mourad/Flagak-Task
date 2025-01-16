@@ -2,15 +2,11 @@ package com.flagak.task_backend.components.carts.controllers;
 
 import com.flagak.task_backend.components.carts.dtos.CartRequestDTO;
 import com.flagak.task_backend.components.carts.dtos.CartResponseDTO;
-import com.flagak.task_backend.components.carts.dtos.CartRequestDTO;
-import com.flagak.task_backend.components.carts.dtos.RemoveFromCartResponseDTO;
 import com.flagak.task_backend.components.carts.services.CartService;
 import com.flagak.task_backend.components.customers.services.CustomerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/cart")
