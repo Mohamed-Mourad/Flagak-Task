@@ -48,3 +48,23 @@ CREATE TABLE cart_items (
                             FOREIGN KEY (cart_id) REFERENCES carts(cart_id) ON DELETE CASCADE,
                             FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
 );
+
+-- Create carts table
+CREATE TABLE orders (
+                        order_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                        customer_id UUID NOT NULL,
+                        total_price DECIMAL(10, 2) NOT NULL,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        FOREIGN KEY (customer_id) REFERENCES Customers(customer_id) ON DELETE CASCADE
+);
+
+-- Create cart_items table
+CREATE TABLE order_items (
+                             order_item_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                             order_id UUID NOT NULL,
+                             product_id UUID NOT NULL,
+                             quantity INT NOT NULL,
+                             price DECIMAL(10, 2) NOT NULL,
+                             FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE CASCADE,
+                             FOREIGN KEY (product_id) REFERENCES Products(product_id) ON DELETE CASCADE
+);

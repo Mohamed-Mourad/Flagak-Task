@@ -54,6 +54,10 @@ src/
                     │   │   ├── controllers/
                     │   │   ├── dtos/
                     │   │   ├── services/
+                    │   ├── orders/
+                    │   │   ├── controllers/
+                    │   │   ├── dtos/
+                    │   │   ├── services/
                     ├── models/
                     │   ├── entities/
                     │   │   ├── CustomerEntity.java
@@ -61,6 +65,8 @@ src/
                     │   │   ├── ProductEntity.java
                     │   │   ├── CartEntity.java
                     │   │   ├── CartItemEntity.java
+                    │   │   ├── OrderEntity.java
+                    │   │   ├── OrderItemEntity.java
                     │   ├── dtos/
                     │   │   ├── LoginRequestDTO.java
                     ├── repos/
@@ -69,6 +75,8 @@ src/
                     │   ├── ProductRepo.java
                     │   ├── CartRepo.java
                     │   ├── CartItemRepo.java
+                    │   ├── OrderRepo.java
+                    │   ├── OrderItemRepo.java
                     ├── config/
                     │   ├── JwtAuthenticationFilter.java
                     │   ├── SecurityConfig.java
@@ -131,6 +139,23 @@ cart_id: UUID (Foreign Key referencing carts.cart_id)
 product_id: UUID (Foreign Key referencing products.product_id)
 quantity: INT
 added_at: TIMESTAMP (Default: Current timestamp)
+```
+
+&nbsp;4. Orders
+```
+order_id: UUID (Primary Key)
+customer_id: UUID (FK referencing customers.customer_id)
+total_price: DECIMAL(10,2)
+created_at: TIMESTAMP (Default: Current timestamp)
+```
+
+&nbsp;5. Order Items
+```
+order_item_id: UUID (Primary Key)
+order_id: UUID (FK referencing orders.order_id)
+product_id: UUID (FK referencing products.product_id)
+quantity: INT
+price: DECIMAL(10,2) (Snapshot of product price at checkout)
 ```
 
 ### SQL Files
