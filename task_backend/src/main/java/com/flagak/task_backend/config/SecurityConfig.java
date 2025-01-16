@@ -29,7 +29,7 @@ public class SecurityConfig {
                         .permitAll() // Public access to these endpoints
                         .requestMatchers("/api/products/add", "/api/products/edit/{id}", "/api/products/delete/{id}")
                         .authenticated() // Requires authentication for these endpoints
-                        .anyRequest().permitAll() // Other endpoints are public
+                        .anyRequest().authenticated() // Other endpoints are public
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class); // Adding the JWT filter to the chain
 

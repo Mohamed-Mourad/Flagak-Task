@@ -146,6 +146,7 @@ added_at: TIMESTAMP (Default: Current timestamp)
 order_id: UUID (Primary Key)
 customer_id: UUID (FK referencing customers.customer_id)
 total_price: DECIMAL(10,2)
+payment_type: VARCHAR(6)
 created_at: TIMESTAMP (Default: Current timestamp)
 ```
 
