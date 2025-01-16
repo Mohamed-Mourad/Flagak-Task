@@ -1,7 +1,7 @@
 {
   "info": {
-    "name": "Flagak Task API Documentation",
-    "description": "This is the API documentation for Flagak task backend.",
+    "name": "E-Commerce API Documentation",
+    "description": "API documentation for customer, vendor, product, cart, and order management.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -12,16 +12,10 @@
           "name": "Register Customer",
           "request": {
             "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
-              }
-            ],
+            "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Postman Tester\",\n  \"email\": \"post.test@example.com\",\n  \"password\": \"postc280\"\n}"
+              "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"password\": \"password123\"\n}"
             },
             "url": {
               "raw": "http://localhost:8080/api/customers/register",
@@ -30,22 +24,17 @@
               "port": "8080",
               "path": ["api", "customers", "register"]
             }
-          }
+          },
+          "response": []
         },
         {
           "name": "Login Customer",
           "request": {
             "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
-              }
-            ],
+            "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"moh.mou@example.com\",\n  \"password\": \"password123\"\n}"
+              "raw": "{\n    \"email\": \"john.doe@example.com\",\n    \"password\": \"password123\"\n}"
             },
             "url": {
               "raw": "http://localhost:8080/api/customers/login",
@@ -54,7 +43,8 @@
               "port": "8080",
               "path": ["api", "customers", "login"]
             }
-          }
+          },
+          "response": []
         }
       ]
     },
@@ -65,16 +55,10 @@
           "name": "Register Vendor",
           "request": {
             "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
-              }
-            ],
+            "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"businessName\": \"Postman Vendors Co.\",\n  \"businessCertificateNumber\": \"CERT91283\",\n  \"billingAddress\": \"123 Tech Street, Cairo, Egypt\",\n  \"email\": \"post.vend@example.com\",\n  \"password\": \"postvpass123\"\n}"
+              "raw": "{\n    \"businessName\": \"Tech Supplies Co.\",\n    \"businessCertificateNumber\": \"CERT12345\",\n    \"billingAddress\": \"123 Tech Street, Cairo, Egypt\",\n    \"email\": \"vendor@example.com\",\n    \"password\": \"password123\"\n}"
             },
             "url": {
               "raw": "http://localhost:8080/api/vendors/register",
@@ -83,22 +67,17 @@
               "port": "8080",
               "path": ["api", "vendors", "register"]
             }
-          }
+          },
+          "response": []
         },
         {
           "name": "Login Vendor",
           "request": {
             "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
-              }
-            ],
+            "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"tech.supplies@example.com\",\n  \"password\": \"techpass123\"\n}"
+              "raw": "{\n    \"email\": \"vendor@example.com\",\n    \"password\": \"password123\"\n}"
             },
             "url": {
               "raw": "http://localhost:8080/api/vendors/login",
@@ -107,7 +86,8 @@
               "port": "8080",
               "path": ["api", "vendors", "login"]
             }
-          }
+          },
+          "response": []
         }
       ]
     },
@@ -125,7 +105,146 @@
               "port": "8080",
               "path": ["api", "products"]
             }
-          }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"productName\": \"Laptop\",\n    \"productDescription\": \"High-end laptop\",\n    \"price\": 1200.00,\n    \"stockQuantity\": 10\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products/add",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "products", "add"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Edit Product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"productName\": \"Laptop Pro\",\n    \"productDescription\": \"Updated high-end laptop\",\n    \"price\": 1300.00,\n    \"stockQuantity\": 12\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products/edit/{id}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "products", "edit", "{id}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Product",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/products/delete/{id}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "products", "delete", "{id}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Cart",
+      "item": [
+        {
+          "name": "Add Item to Cart",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"productId\": \"<product_id>\",\n    \"quantity\": 2\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/cart/add",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "cart", "add"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Item from Cart",
+          "request": {
+            "method": "DELETE",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"productId\": \"<product_id>\",\n    \"quantity\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/cart/remove",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "cart", "remove"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Checkout Order",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:8080/orders/checkout?customerEmail=john.doe@example.com&paymentType=credit",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["orders", "checkout"],
+              "query": [
+                {
+                  "key": "customerEmail",
+                  "value": "john.doe@example.com"
+                },
+                {
+                  "key": "paymentType",
+                  "value": "credit"
+                }
+              ]
+            }
+          },
+          "response": []
         }
       ]
     }
