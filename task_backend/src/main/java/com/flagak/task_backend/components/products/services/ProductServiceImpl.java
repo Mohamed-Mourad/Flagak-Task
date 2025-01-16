@@ -27,6 +27,7 @@ public class ProductServiceImpl implements ProductService {
         return new ProductResponseDTO(
                 product.getProductId().toString(),
                 product.getProductName(),
+                product.getProductDescription(),
                 product.getPrice(),
                 product.getStockQuantity(),
                 product.getVendor().getBusinessName()
@@ -40,6 +41,7 @@ public class ProductServiceImpl implements ProductService {
                 .map(product -> new ProductResponseDTO(
                         product.getProductId().toString(),
                         product.getProductName(),
+                        product.getProductDescription(),
                         product.getPrice(),
                         product.getStockQuantity(),
                         product.getVendor().getBusinessName()
@@ -54,6 +56,7 @@ public class ProductServiceImpl implements ProductService {
 
         ProductEntity product = new ProductEntity();
         product.setProductName(request.getProductName());
+        product.setProductDescription(request.getProductDescription());
         product.setPrice(request.getPrice());
         product.setStockQuantity(request.getStockQuantity());
         product.setVendor(vendor);
@@ -73,6 +76,7 @@ public class ProductServiceImpl implements ProductService {
         }
 
         product.setProductName(request.getProductName());
+        product.setProductDescription(request.getProductDescription());
         product.setPrice(request.getPrice());
         product.setStockQuantity(request.getStockQuantity());
 

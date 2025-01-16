@@ -24,6 +24,9 @@ public class ProductEntity {
     @Column(name = "product_name", nullable = false)
     private String productName;
 
+    @Column(name = "product_description", nullable = false)
+    private String productDescription;
+
     @Column(name = "price", nullable = false)
     private Double price;
 

@@ -8,6 +8,7 @@ import lombok.Data;
 public class ProductResponseDTO {
     private String productId;
     private String productName;
+    private String productDescription;
     private Double price;
     private int stockQuantity;
     private String vendorName;

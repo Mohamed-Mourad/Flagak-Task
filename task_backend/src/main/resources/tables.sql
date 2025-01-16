@@ -22,6 +22,7 @@ CREATE TABLE vendors (
 CREATE TABLE products (
                           product_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
                           product_name VARCHAR(255) NOT NULL,
+                          product_description VARCHAR(1000),
                           price DECIMAL(10, 2) NOT NULL CHECK (price > 0),
                           stock_quantity INT NOT NULL CHECK (stock_quantity >= 0),
                           vendor_id UUID NOT NULL,
