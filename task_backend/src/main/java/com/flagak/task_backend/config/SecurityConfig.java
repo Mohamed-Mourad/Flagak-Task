@@ -27,9 +27,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/products", "/api/vendors/login", "/api/vendors/register", "/api/customers/login", "/api/customers/register")
                         .permitAll() // Public access to these endpoints
-                        .requestMatchers("/api/products/add", "/api/products/edit/{id}", "/api/products/delete/{id}")
+                        .requestMatchers("/api/products/add", "/api/products/edit/{id}", "/api/products/delete/{id}", "/api/products/{vendorId}/sales")
                         .authenticated() // Requires authentication for these endpoints
-                        .anyRequest().authenticated() // Other endpoints are public
+                        .anyRequest().permitAll() // Other endpoints are public
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class); // Adding the JWT filter to the chain
 

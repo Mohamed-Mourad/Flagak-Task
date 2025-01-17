@@ -1,5 +1,6 @@
 package com.flagak.task_backend.components.vendors.controllers;
 
+import com.flagak.task_backend.components.vendors.dtos.SalesDataResponseDTO;
 import com.flagak.task_backend.components.vendors.dtos.VendorRegisterRequestDTO;
 import com.flagak.task_backend.components.vendors.dtos.VendorResponseDTO;
 import com.flagak.task_backend.components.vendors.services.VendorService;
@@ -28,5 +29,11 @@ public class VendorController {
     public ResponseEntity<String> login(@Valid @RequestBody LoginRequestDTO loginRequest) {
         String token = vendorService.login(loginRequest);
         return ResponseEntity.ok(token);
+    }
+
+    @GetMapping("/{vendorId}/sales")
+    public ResponseEntity<SalesDataResponseDTO> getVendorSalesData(@PathVariable String vendorEmail) {
+        SalesDataResponseDTO salesData = vendorService.getSalesData(vendorEmail);
+        return ResponseEntity.ok(salesData);
     }
 }

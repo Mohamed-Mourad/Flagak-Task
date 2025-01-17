@@ -88,6 +88,26 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Get Vendor Sales Data",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/vendors/{vendorEmail}/sales",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "vendors", "{vendorEmail}", "sales"],
+              "variable": [
+                {
+                  "key": "vendorEmail",
+                  "value": "tech.supplies@example.com"
+                }
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },
