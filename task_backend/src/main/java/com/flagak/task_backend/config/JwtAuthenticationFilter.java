@@ -2,6 +2,7 @@ package com.flagak.task_backend.config;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.flagak.task_backend.utils.JwtUtil;
 import jakarta.servlet.FilterChain;
@@ -11,14 +12,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+@Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JwtUtil jwtUtil;
-
-    public JwtAuthenticationFilter(JwtUtil jwtUtil) {
-        this.jwtUtil = jwtUtil;
+    public JwtAuthenticationFilter(){
     }
 
     @Override
@@ -27,8 +27,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String token = extractToken(request);
 
-        if (token != null && jwtUtil.isValidToken(token)) {  // Validate the token
-            SecurityContextHolder.getContext().setAuthentication(null);
+        if (token != null && JwtUtil.isValidToken(token)) {  // Validate the token
+            // Extract the email from the token
+            String email = JwtUtil.extractEmailFromToken(token);
+
+            // Create an Authentication object based on the email (or user details)
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, token, Collections.emptyList());
+
+            // Set the Authentication object to the SecurityContext
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
         filterChain.doFilter(request, response);

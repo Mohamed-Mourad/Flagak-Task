@@ -9,7 +9,10 @@ import com.flagak.task_backend.repos.CartItemRepo;
 import com.flagak.task_backend.repos.CartRepo;
 import com.flagak.task_backend.repos.CustomerRepo;
 import com.flagak.task_backend.repos.ProductRepo;
+import com.flagak.task_backend.utils.JwtUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Service
 public class CartServiceImpl implements CartService{

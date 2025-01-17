@@ -18,14 +18,12 @@ import java.util.UUID;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepo customerRepo;
-    private final BCryptPasswordEncoder passwordEncoder;
-    private final JwtUtil jwtUtil;
+    //private final BCryptPasswordEncoder passwordEncoder;
 
 
     public CustomerServiceImpl(CustomerRepo customerRepo) {
         this.customerRepo = customerRepo;
-        this.passwordEncoder = new BCryptPasswordEncoder();
-        jwtUtil = new JwtUtil();
+        //this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     public CustomerResponseDTO registerCustomer(CustomerRegisterRequestDTO requestDTO) {
@@ -71,7 +69,7 @@ public class CustomerServiceImpl implements CustomerService {
 //            throw new IllegalArgumentException("Invalid email or password");
 //        }
 
-        return jwtUtil.generateToken(customer.getEmail());
+        return JwtUtil.generateToken(customer.getEmail());
     }
 
     @Override

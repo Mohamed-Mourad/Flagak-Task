@@ -34,7 +34,7 @@ public class ProductController {
             @Valid @RequestBody ProductRequestDTO request,
             @RequestHeader("Authorization") String token) {
 
-        String vendorEmail = jwtUtil.extractUsername(token.substring(7)); // Remove "Bearer "
+        String vendorEmail = jwtUtil.extractEmailFromToken(token.substring(7)); // Remove "Bearer "
         ProductResponseDTO response = productService.addProduct(request, vendorEmail);
         return ResponseEntity.ok(response);
     }
@@ -45,7 +45,7 @@ public class ProductController {
             @Valid @RequestBody ProductRequestDTO request,
             @RequestHeader("Authorization") String token) {
 
-        String vendorEmail = jwtUtil.extractUsername(token.substring(7));
+        String vendorEmail = jwtUtil.extractEmailFromToken(token.substring(7));
         ProductResponseDTO response = productService.editProduct(id, request, vendorEmail);
         return ResponseEntity.ok(response);
     }
@@ -55,7 +55,7 @@ public class ProductController {
             @PathVariable UUID id,
             @RequestHeader("Authorization") String token) {
 
-        String vendorEmail = jwtUtil.extractUsername(token.substring(7));
+        String vendorEmail = jwtUtil.extractEmailFromToken(token.substring(7));
         productService.deleteProduct(id, vendorEmail);
         return ResponseEntity.noContent().build();
     }

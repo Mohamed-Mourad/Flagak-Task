@@ -31,7 +31,7 @@ public class VendorController {
         return ResponseEntity.ok(token);
     }
 
-    @GetMapping("/{vendorId}/sales")
+    @GetMapping("/sales/{vendorEmail}")
     public ResponseEntity<SalesDataResponseDTO> getVendorSalesData(@PathVariable String vendorEmail) {
         SalesDataResponseDTO salesData = vendorService.getSalesData(vendorEmail);
         return ResponseEntity.ok(salesData);

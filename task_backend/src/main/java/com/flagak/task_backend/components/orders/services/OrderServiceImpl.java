@@ -2,7 +2,6 @@ package com.flagak.task_backend.components.orders.services;
 
 import com.flagak.task_backend.models.entities.*;
 import com.flagak.task_backend.repos.*;
-import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,20 +11,23 @@ import java.util.ArrayList;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    @Autowired
-    private CartRepo cartRepo;
+    private final CartRepo cartRepo;
 
-    @Autowired
-    private CartItemRepo cartItemRepo;
+    private final CartItemRepo cartItemRepo;
 
-    @Autowired
-    private CustomerRepo customerRepo;
+    private final CustomerRepo customerRepo;
 
-    @Autowired
-    private ProductRepo productRepo;
+    private final ProductRepo productRepo;
 
-    @Autowired
-    private OrderRepo orderRepo;
+    private final OrderRepo orderRepo;
+
+    public OrderServiceImpl(CartRepo cartRepo, CartItemRepo cartItemRepo, CustomerRepo customerRepo, ProductRepo productRepo, OrderRepo orderRepo) {
+        this.cartRepo = cartRepo;
+        this.cartItemRepo = cartItemRepo;
+        this.customerRepo = customerRepo;
+        this.productRepo = productRepo;
+        this.orderRepo = orderRepo;
+    }
 
     @Transactional
     public void checkout(String customerEmail, String paymentType) {
