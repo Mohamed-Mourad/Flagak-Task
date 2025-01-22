@@ -28,7 +28,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable) // Disables CSRF protection
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/products", "/api/vendors/login", "/api/vendors/register", "/api/customers/login", "/api/customers/register")
+                        .requestMatchers("/api/products", "/api/vendors/login", "/api/vendors/register", "/api/customers/login", "/api/customers/register", "api/shopify/**")
                         .permitAll() // Public access to these endpoints
                         .requestMatchers("/api/cart/**", "/api/products/add", "/api/products/edit/{id}", "/api/products/delete/{id}", "/api/products/{vendorId}/sales")
                         .authenticated() // Requires authentication for these endpoints
