@@ -21,9 +21,11 @@ public class ShopifyApiUtil {
 
     public HttpHeaders createAuthHeaders() {
         HttpHeaders headers = new HttpHeaders();
-        String auth = shopifyConfig.getApiKey() + ":" + shopifyConfig.getPassword();
-        String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes());
-        headers.set("Authorization", "Basic " + encodedAuth);
+        // String auth = shopifyConfig.getApiKey() + ":" + shopifyConfig.getPassword();
+        // String auth = "" + ":" + "";
+        // String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes());
+        //headers.set("Authorization", "Basic " + encodedAuth);
+        headers.set("X-Shopify-Access-Token", "xxx");
         return headers;
     }
 }

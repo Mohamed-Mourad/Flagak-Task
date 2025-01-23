@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @NoArgsConstructor
 @Configuration
 public class ShopifyConfig {
-    private String baseUrl = "https://flagak-task-1.myshopify.com";
-    private String apiKey = "apiKey";
-    private String password = "password";
+    private String baseUrl = "https://flagak-task-1.myshopify.com/admin/api/2025-01/";
+    private String apiKey = "xxx";
+    private String password = "xxx";
 }

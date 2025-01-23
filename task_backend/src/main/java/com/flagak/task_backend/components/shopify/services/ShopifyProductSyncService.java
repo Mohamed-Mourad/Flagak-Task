@@ -5,6 +5,7 @@ import com.flagak.task_backend.components.shopify.dtos.ShopifyVariantDTO;
 import com.flagak.task_backend.models.entities.ProductEntity;
 import com.flagak.task_backend.repos.ProductRepo;
 import com.flagak.task_backend.components.shopify.utils.ShopifyApiUtil;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -30,23 +31,24 @@ public class ShopifyProductSyncService {
     }
 
     public void syncAllProducts() {
-        String url = shopifyApiUtil.buildApiUrl("/admin/api/2023-01/products.json");
+        String url = shopifyApiUtil.buildApiUrl("products.json");
 
         // Build headers with Basic Auth
         HttpHeaders headers = shopifyApiUtil.createAuthHeaders();
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         // Fetch products from Shopify
-        ResponseEntity<ShopifyProductDTO[]> response = restTemplate.exchange(
+        ResponseEntity<List<ShopifyProductDTO>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 entity,
-                ShopifyProductDTO[].class
+                new ParameterizedTypeReference<>() {
+                }
         );
 
         if (response.getStatusCode().is2xxSuccessful()) {
-            ShopifyProductDTO[] products = response.getBody();
-            saveProducts(Arrays.asList(products));
+            List<ShopifyProductDTO> products = response.getBody();
+            saveProducts(products);
         } else {
             throw new RuntimeException("Failed to fetch products from Shopify: " + response.getStatusCode());
         }
