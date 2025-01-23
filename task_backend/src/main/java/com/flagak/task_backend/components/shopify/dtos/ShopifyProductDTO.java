@@ -7,5 +7,6 @@ import java.util.List;
 public class ShopifyProductDTO {
     private String title;
     private String body_html;
+    private String vendor_name;
     private List<ShopifyVariantDTO> variants;
 }

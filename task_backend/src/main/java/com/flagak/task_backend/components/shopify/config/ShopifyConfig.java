@@ -9,6 +9,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ShopifyConfig {
     private String baseUrl = "https://flagak-task-1.myshopify.com/admin/api/2025-01/";
-    private String apiKey = "xxx";
-    private String password = "xxx";
+    private String apiKey = "XXX";
+    private String password = "XXX";
 }

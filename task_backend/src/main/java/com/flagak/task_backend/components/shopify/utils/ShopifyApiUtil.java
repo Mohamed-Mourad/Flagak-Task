@@ -25,7 +25,7 @@ public class ShopifyApiUtil {
         // String auth = "" + ":" + "";
         // String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes());
         //headers.set("Authorization", "Basic " + encodedAuth);
-        headers.set("X-Shopify-Access-Token", "xxx");
+        headers.set("X-Shopify-Access-Token", "XXX");
         return headers;
     }
 }
